@@ -22,7 +22,6 @@ var _ = require('underscore');
 var awssum = require('awssum');
 var amazon = require('awssum-amazon');
 var operations = require('./config.js');
-var awsSignatureV4 = require('./aws-signature-v4');
 
 // --------------------------------------------------------------------------------------------------------------------
 // package variables
@@ -67,7 +66,7 @@ var Sqs = function(opts) {
 };
 
 // inherit from Amazon
-util.inherits(Sqs, amazon.Amazon);
+util.inherits(Sqs, amazon.AmazonSignatureV4);
 
 // --------------------------------------------------------------------------------------------------------------------
 // methods we need to implement from awssum.js/amazon.js
@@ -91,12 +90,9 @@ Sqs.prototype.needsTarget = function() {
     return false;
 }
 
-// This service uses the AWS Signature v4.
-Sqs.prototype.strToSign        = awsSignatureV4.strToSign;
-Sqs.prototype.signature        = awsSignatureV4.signature;
-Sqs.prototype.addSignature     = awsSignatureV4.addSignature;
-Sqs.prototype.addCommonOptions = awsSignatureV4.addCommonOptions;
-Sqs.prototype.contentType      = function() { return 'application/x-amz-json-1.0'; };
+Sqs.prototype.contentType = function() {
+    return 'application/x-amz-json-1.0';
+};
 
 // --------------------------------------------------------------------------------------------------------------------
 // operations on the service
