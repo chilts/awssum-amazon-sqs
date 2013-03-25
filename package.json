@@ -1,6 +1,6 @@
 {
     "name" : "awssum-amazon-sqs",
-    "description" : "NodeJS module to talk to Amazon Simple Queue Service (SQS).",
+    "description" : "AwsSum plugin for Amazon Simple Queue Service (SQS).",
     "version" : "1.0.0",
 
     "main" : "awssum-amazon-sqs.js",
