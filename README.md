@@ -12,15 +12,17 @@ List all your alarms:
 
 ```
 var fmt = require('fmt');
-var amazonSqs = require('awssum-amazon-sqs);
+var amazon = require('awssum-amazon');
+var amazonSqs = require('awssum-amazon-sqs');
 
 var sqs = new amazonSqs.Sqs({
+    'awsAccountId'    : '...',
     'accessKeyId'     : process.env.ACCESS_KEY_ID,
     'secretAccessKey' : process.env.SECRET_ACCESS_KEY,
-    'region'          : amazonSqs.US_EAST_1
+    'region'          : amazon.US_EAST_1
 });
 
-sqs.ListAlarms(function(err, data) {
+sqs.ListQueues(function(err, data) {
     fmt.dump(err, 'err');
     fmt.dump(data, 'data');
 });
